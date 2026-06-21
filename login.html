@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión - Pastelería 1000 Sabores</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <section class="form-section">
+        <div class="form-wrapper" style="max-width: 400px;"> 
+            <h2>Inicio de Sesión</h2>
+
+            <form id="form-login" novalidate>
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="login-email" placeholder="correo@gmail.cl">
+                    <div class="error-text" id="err-login-email"></div>
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="login-pass" placeholder="********">
+                    <div class="error-text" id="err-login-pass"></div>
+                </div>
+
+                <!-- Banner movido dentro del form, sobre el botón -->
+                <div class="success-banner" id="login-success" style="display: none; background-color: #d4edda; color: #155724; padding: 10px; border-radius: 6px; text-align: center; margin-bottom: 15px;">
+                    ¡Bienvenido de nuevo!
+                </div>
+
+                <button type="submit" class="btn-action">Iniciar Sesión</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="js/productos.js"></script>
+    <script src="js/carrito.js"></script>
+    <script src="js/validaciones.js"></script>
+</body>
+</html>

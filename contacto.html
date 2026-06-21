@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Pastelería 1000 Sabores</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <section class="form-section">
+        <div class="form-wrapper">
+            <h2>Formulario de Contacto</h2>
+            
+            <form id="form-contacto" novalidate>
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="cont-nombre" placeholder="Tu nombre">
+                    <div class="error-text" id="err-cont-nombre"></div>
+                </div>
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="cont-email" placeholder="ejemplo@gmail.cl">
+                    <div class="error-text" id="err-cont-email"></div>
+                </div>
+                <div class="form-group">
+                    <label>Comentario</label>
+                    <textarea id="cont-mensaje" rows="5" placeholder="Escribe tu consulta aquí..."></textarea>
+                    <div class="error-text" id="err-cont-mensaje"></div>
+                </div>
+
+                <!-- Banner movido dentro del form, sobre el botón -->
+                <div class="success-banner" id="contacto-success" style="display: none; background-color: #d4edda; color: #155724; padding: 10px; border-radius: 6px; text-align: center; margin-bottom: 15px;">
+                    ¡Mensaje enviado exitosamente!
+                </div>
+
+                <button type="submit" class="btn-action">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="js/productos.js"></script>
+    <script src="js/carrito.js"></script>
+    <script src="js/validaciones.js"></script>
+</body>
+</html>

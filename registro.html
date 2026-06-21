@@ -1,0 +1,101 @@
+Aquí tienes el código de registro.html con el banner de éxito movido justo encima del botón "Registrar Cuenta", tal como lo pediste. He verificado que todo el resto de la estructura y los estilos se mantengan intactos.
+
+registro.html (Modificado)
+HTML
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Pastelería 1000 Sabores</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <section class="form-section" style="padding: 60px 0; display: flex; justify-content: center;">
+        <div class="form-wrapper" style="max-width: 600px; width: 100%; background: var(--white); padding: 40px; border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.05); border: 1px solid rgba(139, 90, 43, 0.15);">
+            
+            <h2 style="color: var(--accent-choco); margin-bottom: 20px; font-size: 2rem; border-bottom: 2px solid var(--accent-pink); padding-bottom: 10px;">
+                Registro de Usuario
+            </h2>
+            
+            <form id="form-registro" novalidate style="display: flex; flex-direction: column; gap: 18px; text-align: left;">
+                
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                    <label style="font-weight: 600; color: var(--accent-choco);">RUN (Sin puntos ni guion)</label>
+                    <input type="text" id="reg-run" placeholder="19011022K" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; width: 100%;">
+                    <div class="error-text" id="err-reg-run" style="color: #e1306c; font-size: 14px; display: none; font-weight: 500; margin-top: 2px;">RUN es requerido.</div>
+                </div>
+                
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                    <label style="font-weight: 600; color: var(--accent-choco);">Nombre</label>
+                    <input type="text" id="reg-nombre" placeholder="Nombre" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; width: 100%;">
+                    <div class="error-text" id="err-reg-nombre" style="color: #e1306c; font-size: 14px; display: none; font-weight: 500; margin-top: 2px;">Nombre es requerido.</div>
+                </div>
+                
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                    <label style="font-weight: 600; color: var(--accent-choco);">Apellidos</label>
+                    <input type="text" id="reg-apellidos" placeholder="Apellidos" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; width: 100%;">
+                    <div class="error-text" id="err-reg-apellidos" style="color: #e1306c; font-size: 14px; display: none; font-weight: 500; margin-top: 2px;">Apellidos son requeridos.</div>
+                </div>
+                
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                    <label style="font-weight: 600; color: var(--accent-choco);">Correo Electrónico</label>
+                    <input type="email" id="reg-email" placeholder="correo@gmail.cl" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; width: 100%;">
+                    <div class="error-text" id="err-reg-email" style="color: #e1306c; font-size: 14px; display: none; font-weight: 500; margin-top: 2px;">Correo es requerido.</div>
+                </div>
+
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                    <label style="font-weight: 600; color: var(--accent-choco);">Contraseña</label>
+                    <input type="password" id="reg-pass" placeholder="********" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; width: 100%;">
+                    <div class="error-text" id="err-reg-pass" style="color: #e1306c; font-size: 14px; display: none; font-weight: 500; margin-top: 2px;">Contraseña es requerida.</div>
+                </div>
+
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                    <label style="font-weight: 600; color: var(--accent-choco);">Confirmar Contraseña</label>
+                    <input type="password" id="reg-pass-conf" placeholder="********" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; width: 100%;">
+                    <div class="error-text" id="err-reg-pass-conf" style="color: #e1306c; font-size: 14px; display: none; font-weight: 500; margin-top: 2px;">Las contraseñas no coinciden.</div>
+                </div>
+
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                    <label style="font-weight: 600; color: var(--accent-choco);">Región</label>
+                    <select id="miRegion" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px;"></select>
+                    <div class="error-text" id="err-miRegion" style="color: #e1306c; font-size: 14px; display: none; font-weight: 500; margin-top: 2px;">Debe seleccionar una región.</div>
+                </div>
+
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                    <label style="font-weight: 600; color: var(--accent-choco);">Comuna</label>
+                    <select id="miComuna" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px;"></select>
+                    <div class="error-text" id="err-miComuna" style="color: #e1306c; font-size: 14px; display: none; font-weight: 500; margin-top: 2px;">Debe seleccionar una comuna.</div>
+                </div>
+
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
+                    <label style="font-weight: 600; color: var(--accent-choco);">Dirección</label>
+                    <input type="text" id="reg-dir" placeholder="Av. Concha y Toro 1234" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; width: 100%;">
+                    <div class="error-text" id="err-reg-dir" style="color: #e1306c; font-size: 14px; display: none; font-weight: 500; margin-top: 2px;">Dirección es requerida.</div>
+                </div>
+
+                <div class="success-banner" id="registro-success" style="display: none; background-color: #d4edda; color: #155724; padding: 12px; border-radius: 6px; font-weight: bold; border: 1px solid #c3e6cb; text-align: center; margin-top: 10px;">
+                    <i class="fas fa-check-circle"></i> ¡Usuario creado correctamente!
+                </div>
+                
+                <button type="submit" class="btn-action" style="padding: 12px; border: none; cursor: pointer; font-size: 16px; margin-top: 5px; background-color: var(--accent-choco); color: #fff; border-radius: 6px; font-weight: bold;">
+                    Registrar Cuenta
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <script src="js/productos.js"></script>
+    <script src="js/carrito.js"></script>
+    <script src="js/validaciones.js"></script>
+    <script src="js/datos.js"></script> 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            iniciarSelectores('miRegion', 'miComuna');
+        });
+    </script>
+</body>
+</html>
