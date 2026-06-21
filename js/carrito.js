@@ -183,19 +183,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 statusPago.style.backgroundColor = '#d4edda';
                 statusPago.style.color = '#155724';
                 statusPago.style.border = '1px solid #c3e6cb';
-                statusPago.innerHTML = '<i class="fas fa-check-circle"></i> ¡Pago Aprobado! Tu pedido será preparado lo más pronto posible.';
+                statusPago.innerHTML = '<i class="fas fa-check-circle"></i> ¡Pago Aprobado! Tu pedido será preparado lo más pronto posible.'
 
                 carrito = [];
                 guardarYActualizar();
                 renderizarCarrito();
                 formTarjeta.reset();
-                if(btnSubmit) btnSubmit.disabled = false;
+                if(btnSubmit) btnSubmit.disabled = false
 
                 setTimeout(() => {
                     window.location.href = '#';
-                    statusPago.style.display = 'none';
-                }, 2500);
-            }, 2000);
+                    statusPago.style.display = 'none'
+                }, 2500)
+            }, 2000)
         });
     }
 });

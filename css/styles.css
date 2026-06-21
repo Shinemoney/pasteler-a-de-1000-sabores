@@ -2,9 +2,9 @@
    1. VARIABLES DE COLORES (Definición global)
    ========================================================================== */
 :root {
-    --accent-choco: #3d2514;      /* Marrón oscuro corporativo */
-    --accent-pink: #ffb3ba;       /* El rosado pastel muy bonito */
-    --accent-pink-hover: #ffc0cb; /* Rosado claro para efectos hover */
+    --accent-choco: #3d2514;      
+    --accent-pink: #ffb3ba;       
+    --accent-pink-hover: #ffc0cb; 
     --text-primary: #3d2514;
     --white: #ffffff;
     --bg-clear: rgba(255, 255, 255, 0.93);
@@ -35,9 +35,7 @@ body {
     flex-direction: column;
 }
 
-/* ¡Adiós Azul Eléctrico por defecto!
-   Asegura el rosado corporativo en los hipervínculos ordinarios y remueve subrayados bruscos
-*/
+
 a {
     text-decoration: none !important;
     color: var(--accent-pink) !important; 
@@ -73,7 +71,7 @@ header {
 }
 
 .nav-links a {
-    color: #f4eade !important; /* Letras crema para un contraste limpio en el menú superior */
+    color: #f4eade !important; 
     margin-left: 20px;
     font-size: 16px;
     font-weight: 500;
@@ -263,7 +261,7 @@ footer a:hover {
    ========================================================================== */
 .modal-window {
     position: fixed;
-    background-color: rgba(61, 37, 20, 0.75); /* Fondo oscuro semitransparente overlay */
+    background-color: rgba(61, 37, 20, 0.75); 
     top: 0;
     right: 0;
     bottom: 0;
