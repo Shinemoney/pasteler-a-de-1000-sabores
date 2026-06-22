@@ -13,8 +13,8 @@ function iniciarSelectores(idReg, idCom) {
     const com = document.getElementById(idCom);
     
     // Limpiar selectores al iniciar
-    reg.innerHTML = '<option value="">Seleccione Región</option>';
-    com.innerHTML = '<option value="">Seleccione Comuna</option>';
+    reg.innerHTML = '<option value="">Seleccione Región</option>'
+    com.innerHTML = '<option value="">Seleccione Comuna</option>'
     
     // Llenar regiones
     for (let r in regionesYComunas) {
@@ -23,7 +23,7 @@ function iniciarSelectores(idReg, idCom) {
     
     // Al cambiar región, limpiar y llenar comunas
     reg.addEventListener("change", () => {
-        com.innerHTML = '<option value="">Seleccione Comuna</option>';
+        com.innerHTML = '<option value="">Seleccione Comuna</option>'
         if (reg.value && regionesYComunas[reg.value]) {
             regionesYComunas[reg.value].forEach(c => {
                 com.options.add(new Option(c, c));
