@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Procesar Pago - 1000 Sabores</title>
+</head>
+<body style="background-color: #FFF5E1; font-family: sans-serif; display: flex; justify-content: center; padding-top: 50px;">
+    <div style="background: white; padding: 40px; border-radius: 15px; border: 2px solid #FFC0CB; width: 350px;">
+        <h2 style="color: #8B4513; text-align: center;">Datos de Envío</h2>
+        
+        <label style="color:#8B4513; font-weight:bold;">Fecha de entrega preferida:</label>
+        <input type="date" id="fecha-entrega" style="width: 100%; margin: 10px 0 20px 0; padding: 10px; box-sizing: border-box;">
+        
+        <button onclick="procesarPago()" style="width: 100%; background: #8B4513; color: white; padding: 15px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+            Confirmar Pedido
+        </button>
+    </div>
+
+    <script>
+        function procesarPago() {
+            const fecha = document.getElementById('fecha-entrega').value;
+            if(!fecha) { alert('Por favor selecciona una fecha'); return; }
+            
+            // Generar ID de pedido aleatorio
+            const orderId = 'PED-' + Math.floor(Math.random() * 9000 + 1000);
+            localStorage.setItem('ultimo_pedido', orderId);
+            
+            alert('¡Pago exitoso! Tu pedido ' + orderId + ' ha sido registrado.');
+            window.location.href = 'seguimiento.html';
+        }
+    </script>
+</body>
+</html>

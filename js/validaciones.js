@@ -1,7 +1,3 @@
-// Funciones de utilidad comunes
-const noVacio = (v) => v.trim() !== '';
-const esEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
-
 // Definición de reglas básicas para formularios
 const reglasConfig = {
     'form-registro': [
@@ -13,7 +9,10 @@ const reglasConfig = {
         { id: 'reg-pass-conf', validar: noVacio, mensaje: 'Debe confirmar su contraseña' },
         { id: 'miRegion', validar: noVacio, mensaje: 'Debe seleccionar una región' },
         { id: 'miComuna', validar: noVacio, mensaje: 'Debe seleccionar una comuna' },
-        { id: 'reg-dir', validar: noVacio, mensaje: 'Dirección es requerida' }
+        { id: 'reg-dir', validar: noVacio, mensaje: 'Dirección es requerida' },
+        { id: 'reg-fecha-nac', validar: noVacio, mensaje: 'Fecha de nacimiento es requerida' },
+        { id: 'reg-codigo', validar: () => true, mensaje: '' },
+        { id: 'reg-email-duoc', validar: (v) => v === '' || esCorreoDuoc(v), mensaje: 'Correo institucional inválido' }
     ],
     'form-login': [
         { id: 'login-email', validar: esEmail, mensaje: 'Ingrese un correo válido' },
@@ -36,52 +35,33 @@ function inicializarFormulario(formId, successId) {
         let esValido = true;
         const reglas = reglasConfig[formId];
 
-        // 1. Validar campos obligatorios
         reglas.forEach(regla => {
             const campo = document.getElementById(regla.id);
             const errorDiv = document.getElementById('err-' + regla.id);
-            if (!regla.validar(campo.value)) {
+            if (campo && !regla.validar(campo.value)) {
                 campo.style.borderColor = '#e1306c';
-                if(errorDiv) errorDiv.style.display = 'block';
+                if(errorDiv) {
+                    errorDiv.textContent = regla.mensaje;
+                    errorDiv.style.display = 'block';
+                }
                 esValido = false;
-            } else {
+            } else if (campo) {
                 campo.style.borderColor = '#ccc';
                 if(errorDiv) errorDiv.style.display = 'none';
             }
         });
 
-        // 2. Lógica específica según el formulario
         if (esValido) {
-            
-            // Lógica de Registro (Guardar en localStorage)
             if (formId === 'form-registro') {
                 if (document.getElementById('reg-pass').value !== document.getElementById('reg-pass-conf').value) {
-                    document.getElementById('err-reg-pass-conf').textContent = "Las contraseñas no coinciden";
-                    document.getElementById('err-reg-pass-conf').style.display = 'block';
+                    const confError = document.getElementById('err-reg-pass-conf');
+                    confError.textContent = "Las contraseñas no coinciden";
+                    confError.style.display = 'block';
                     return;
                 }
-                const email = document.getElementById('reg-email').value;
-                const pass = document.getElementById('reg-pass').value;
-                localStorage.setItem('usuarioRegistrado', JSON.stringify({ email, pass }));
+                // Aquí podrías guardar otros datos adicionales en el objeto usuario
+                localStorage.setItem('usuarioRegistrado', JSON.stringify({ email: document.getElementById('reg-email').value }));
             }
-
-            // Lógica de Login (Validar contra localStorage)
-            if (formId === 'form-login') {
-                const emailInput = document.getElementById('login-email').value;
-                const passInput = document.getElementById('login-pass').value;
-                const user = JSON.parse(localStorage.getItem('usuarioRegistrado'));
-
-                if (user && emailInput === user.email && passInput === user.pass) {
-                    successBanner.textContent = "¡Inicio de sesión exitoso!";
-                    successBanner.style.display = 'block';
-                } else {
-                    document.getElementById('err-login-pass').textContent = "Correo o contraseña no coinciden.";
-                    document.getElementById('err-login-pass').style.display = 'block';
-                    return;
-                }
-            }
-
-            // Éxito común para todos
             if(successBanner) successBanner.style.display = 'block';
             form.reset();
             if(formId === 'form-registro' && typeof iniciarSelectores === 'function') iniciarSelectores('miRegion', 'miComuna');
@@ -94,4 +74,5 @@ document.addEventListener('DOMContentLoaded', () => {
     inicializarFormulario('form-registro', 'registro-success');
     inicializarFormulario('form-login', 'login-success');
     inicializarFormulario('form-contacto', 'contacto-success');
+    if (typeof iniciarSelectores === 'function') iniciarSelectores('miRegion', 'miComuna');
 });

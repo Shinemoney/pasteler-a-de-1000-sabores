@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog y Comunidad - Pastelería 1000 Sabores</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body style="margin: 0; font-family: Arial, sans-serif; background-color: #fdf6f6;">
+
+    <!-- Aquí iría tu nav-placeholder -->
+    
+
+    <section class="blog-section" style="padding: 60px 20px; max-width: 1000px; margin: 0 auto;">
+        <h2 style="color: #8B4513; text-align: center; font-size: 2.5rem; margin-bottom: 10px;">Rincón del Aprendiz</h2>
+        <p style="text-align: center; color: #5D4037; margin-bottom: 40px; font-style: italic;">
+            Consejos, recetas y noticias compartidas por nuestros estudiantes de gastronomía Duoc.
+        </p>
+        
+        <!-- Cuadrícula de Contenido -->
+        <div class="blog-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            
+            <!-- Post 1 -->
+            <article class="blog-card" style="background: white; padding: 25px; border-radius: 12px; border: 1px solid #FFC0CB; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <h3 style="color: #D2691E; margin-top: 0;">Técnicas de Temperado</h3>
+                <p style="color: #5D4037; font-size: 0.95rem; line-height: 1.5;">Dominar el temperado del chocolate es esencial para lograr ese brillo profesional. Aprende los rangos de temperatura ideales según nuestros expertos.</p>
+                <a href="#" style="color: #e1306c; font-weight: bold; text-decoration: none;">Leer artículo →</a>
+            </article>
+
+            <!-- Post 2 -->
+            <article class="blog-card" style="background: white; padding: 25px; border-radius: 12px; border: 1px solid #FFC0CB; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <h3 style="color: #D2691E; margin-top: 0;">Merengue Italiano</h3>
+                <p style="color: #5D4037; font-size: 0.95rem; line-height: 1.5;">La guía definitiva para un merengue estable y brillante. Perfecto para decorar tus pasteles favoritos sin riesgo a que bajen.</p>
+                <a href="#" style="color: #e1306c; font-weight: bold; text-decoration: none;">Leer artículo →</a>
+            </article>
+
+            <!-- Post 3 -->
+            <article class="blog-card" style="background: white; padding: 25px; border-radius: 12px; border: 1px solid #FFC0CB; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <h3 style="color: #D2691E; margin-top: 0;">Tendencias 2026</h3>
+                <p style="color: #5D4037; font-size: 0.95rem; line-height: 1.5;">Exploramos las nuevas tendencias de repostería saludable que están marcando pauta en las cocinas de nuestros estudiantes este semestre.</p>
+                <a href="#" style="color: #e1306c; font-weight: bold; text-decoration: none;">Leer artículo →</a>
+            </article>
+        </div>
+
+        <!-- Formulario de Consulta Comunitaria -->
+        <div class="community-box" style="margin-top: 60px; background: #ffffff; padding: 30px; border-radius: 12px; border: 1px solid #FFC0CB; text-align: center;">
+            <h3 style="color: #8B4513;">¿Tienes una duda técnica?</h3>
+            <p style="color: #5D4037;">Deja tu pregunta y un estudiante de gastronomía la responderá en nuestro próximo boletín.</p>
+            <form id="form-consulta" style="max-width: 500px; margin: 20px auto 0; display: flex; flex-direction: column; gap: 10px;">
+                <input type="text" placeholder="Tu nombre" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
+                <textarea placeholder="Escribe tu consulta sobre repostería..." style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; height: 80px;"></textarea>
+                <button type="submit" style="padding: 10px; background: #FFC0CB; border: none; border-radius: 6px; color: #8B4513; font-weight: bold; cursor: pointer;">Enviar Pregunta</button>
+            </form>
+        </div>
+    </section>
+
+</body>
+</html>

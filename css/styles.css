@@ -1,313 +1,81 @@
 /* ==========================================================================
-   1. VARIABLES DE COLORES (Definición global)
+   1. VARIABLES DE COLORES Y FUENTES (Oficiales según documento)
    ========================================================================== */
 :root {
-    --accent-choco: #3d2514;      
-    --accent-pink: #ffb3ba;       
-    --accent-pink-hover: #ffc0cb; 
-    --text-primary: #3d2514;
-    --white: #ffffff;
-    --bg-clear: rgba(255, 255, 255, 0.93);
+    --choco: #8B4513;        /* Chocolate - Principal */
+    --pink: #FFC0CB;         /* Rosa Suave - Acentos */
+    --crema: #FFF5E1;        /* Crema Pastel - Fondo */
+    --gris: #B0BEC5;         /* Gris Claro - Texto secundario */
+    --text-main: #5D4037;    /* Marrón Oscuro - Texto principal */
 }
 
 /* ==========================================================================
-   2. RESETEO Y CONFIGURACIÓN DEL FONDO (BACKGROUND)
+   2. CONFIGURACIÓN GLOBAL
    ========================================================================== */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+/* Importación de fuentes oficiales */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    /* Fondo limpio cargado desde la carpeta assets */
-    background-image: url('../assets/fondo-catalogo.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-color: #f7ebe1; /* Color de respaldo */
-    
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--text-primary);
+    background-color: var(--crema);
+    font-family: 'Lato', sans-serif;
+    color: var(--text-main);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
+h1, h2, h3, h4 { font-family: 'Pacifico', cursive; color: var(--choco); }
 
-a {
-    text-decoration: none !important;
-    color: var(--accent-pink) !important; 
-    transition: color 0.2s ease;
-}
-
-a:hover {
-    color: var(--accent-pink-hover) !important;
-}
+a { text-decoration: none; color: var(--choco); transition: 0.3s; }
+a:hover { color: var(--pink); }
 
 /* ==========================================================================
-   3. ENCABEZADO / MENÚ SUPERIOR (Inyectado en nav-placeholder)
+   3. ENCABEZADO Y BOTONES
    ========================================================================== */
-header {
-    background-color: var(--accent-choco);
-    padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
+header { background-color: var(--choco); padding: 20px; color: var(--crema); }
 
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo, header a.logo {
-    color: var(--accent-pink) !important;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.nav-links a {
-    color: #f4eade !important; 
-    margin-left: 20px;
-    font-size: 16px;
-    font-weight: 500;
-}
-
-.nav-links a:hover {
-    color: var(--accent-pink) !important;
-}
-
-.cart-icon-container {
-    position: relative;
-    color: var(--accent-pink) !important;
-}
-
-.cart-count {
-    position: absolute;
-    top: -10px;
-    right: -12px;
-    background-color: #8b5a2b;
-    color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-/* ==========================================================================
-   4. CONTENEDORES Y AJUSTES DE MAQUETACIÓN
-   ========================================================================== */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    width: 100%;
-}
-
-section {
-    background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)) !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    margin: 20px 0;
-    border-radius: 0;
-}
-
-/* Estilización específica de botones de llamada a la acción */
 .btn-action {
-    display: inline-block;
-    background-color: var(--accent-choco) !important;
-    color: var(--white) !important; /* Texto blanco legible */
-    border-radius: 6px;
+    background-color: var(--pink);
+    color: var(--choco);
+    padding: 12px 30px;
+    border-radius: 5px;
     font-weight: bold;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
 }
 
-.btn-action:hover {
-    background-color: #55351c !important;
-    transform: translateY(-2px);
-}
-
-.btn-action i {
-    margin-right: 8px;
-}
+.btn-action:hover { background-color: var(--choco); color: var(--crema); }
 
 /* ==========================================================================
-   5. CATÁLOGO DE PRODUCTOS (GRID DE PRODUCTOS)
+   4. CATÁLOGO Y TARJETAS
    ========================================================================== */
-.main-title {
-    text-align: center;
-    margin: 40px 0 10px 0;
-    font-size: 32px;
-    color: var(--accent-choco);
-    text-transform: uppercase;
-}
-
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 30px;
-    padding: 20px 0 60px 0;
+    padding: 40px 20px;
 }
 
 .product-card {
-    background-color: var(--bg-clear);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(139, 90, 43, 0.15);
-    display: flex;
-    flex-direction: column;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
-}
-
-.product-image-container {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-}
-
-.product-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.product-card:hover img {
-    transform: scale(1.05);
-}
-
-.product-info {
+    background-color: white;
+    border-radius: 15px;
     padding: 20px;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+    border: 2px solid var(--pink);
+    transition: 0.3s;
 }
 
-.product-cat {
-    font-size: 12px;
-    color: #8b5a2b;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.product-name {
-    font-size: 17px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: var(--accent-choco);
-    height: 44px;
-    overflow: hidden;
-}
-
-.product-price {
-    font-size: 19px;
-    font-weight: bold;
-    color: #8b5a2b;
-    margin-bottom: 15px;
-    margin-top: auto;
-}
-
-.btn-add {
-    width: 100%;
-    background-color: var(--accent-choco);
-    color: white !important;
-    border: none;
-    padding: 10px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.btn-add:hover {
-    background-color: #8b5a2b;
-}
+.product-card:hover { transform: scale(1.05); }
 
 /* ==========================================================================
-   6. PIE DE PÁGINA (FOOTER REFORMADO)
+   5. FOOTER Y MODALES
    ========================================================================== */
-footer {
-    background-color: var(--accent-choco);
-    color: var(--white);
-    padding: 40px 0 0 0;
-    margin-top: auto;
-    width: 100%;
-}
-
-/* Modificación para enlaces y redes sociales integrados en el footer */
-footer a {
-    color: var(--white) !important;
-    transition: color 0.2s ease;
-}
-
-footer a:hover {
-    color: var(--accent-pink) !important;
-}
-
-/* ==========================================================================
-   7. VENTANA MODAL INTERACTIVA (HORARIOS)
-   ========================================================================== */
-.modal-window {
-    position: fixed;
-    background-color: rgba(61, 37, 20, 0.75); 
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 9999;
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s ease;
-}
-
-/* Captura de anclaje CSS nativo para apertura (:target) */
-.modal-window:target {
-    visibility: visible;
-    opacity: 1;
-    pointer-events: auto;
-}
+footer { background-color: var(--choco); color: var(--crema); padding: 40px; text-align: center; }
 
 .modal-content {
-    width: 400px;
-    max-width: 90%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    background: var(--crema);
+    border: 3px solid var(--pink);
     padding: 30px;
-    background: #ffffff;
     border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    border: 3px solid var(--accent-pink);
-}
-
-.modal-close {
-    color: #a89480;
-    line-height: 50px;
-    font-size: 32px;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    top: 0;
-    width: 70px;
-    text-decoration: none !important;
-    transition: color 0.2s ease;
-}
-
-.modal-close:hover {
-    color: var(--accent-choco) !important;
 }

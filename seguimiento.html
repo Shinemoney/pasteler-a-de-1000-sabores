@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Seguimiento de Pedido</title>
+</head>
+<body style="background-color: #FFF5E1; font-family: sans-serif; text-align: center; padding-top: 50px;">
+    <div style="max-width: 600px; margin: auto; padding: 30px; background: white; border-radius: 15px; border: 2px solid #FFC0CB;">
+        <h2 style="color: #8B4513;">Estado de tu Pedido</h2>
+        <h3 id="order-display" style="color: #666;">Cargando...</h3>
+        
+        <div style="display: flex; justify-content: space-between; margin: 50px 0; color: #ccc;">
+            <div id="est-1" style="font-weight:bold;">📦 Preparando</div>
+            <div id="est-2">🚚 En Ruta</div>
+            <div id="est-3">🏠 Entregado</div>
+        </div>
+        <p style="font-size: 0.9rem; color: #8B4513;">* El estado se actualiza automáticamente.</p>
+    </div>
+
+    <script>
+        // Mostrar el ID del pedido guardado
+        document.getElementById('order-display').textContent = "Pedido: " + localStorage.getItem('ultimo_pedido');
+
+        // Lógica de simulación de tiempo real
+        let estados = ['est-1', 'est-2', 'est-3'];
+        let i = 0;
+        
+        const actualizarEstado = () => {
+            document.querySelectorAll('div[id^="est-"]').forEach(el => el.style.color = '#ccc');
+            document.getElementById(estados[i]).style.color = '#8B4513';
+            i = (i + 1) % estados.length;
+        };
+
+        setInterval(actualizarEstado, 4000); // Cambia el estado cada 4 segundos
+        actualizarEstado();
+    </script>
+</body>
+</html>
