@@ -2,57 +2,110 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Catálogo - Pastelería 1000 Sabores</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Ventas - Pastelería 1000 Sabores</title>
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body style="background-color: #FFF5E1; font-family: sans-serif; margin: 0;">
+<body>
 
-    <div id="nav-placeholder"></div>
+    <header>
+        <nav class="nav-container">
+            <a href="index.html" style="font-size: 1.5rem; font-family: 'Pacifico';"> Pastelería 1000 Sabores</a>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="productos.html">Productos</a>
+                <a href="index.html#registro">Registro</a>
+                <a href="blog.html">Blog</a>
+                <a href="index.html#contacto">Contacto</a>
+                <a href="carrito.html"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </nav>
+    </header>
 
-    <main style="padding: 40px 20px; max-width: 1000px; margin: auto;">
-        <h1 style="color: #8B4513; text-align: center;">Nuestro Catálogo</h1>
-        <div id="grid-productos-target" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px;"></div>
+    <main class="container" style="padding: 40px 0;">
+        <h1 style="color: var(--accent-choco); text-align: center;">Catálogo de Productos</h1>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <select id="filtro-forma" onchange="renderizarProductos()" style="padding: 10px; border-radius: 6px;">
+                <option value="Todos">Todas las formas</option>
+                <option value="Circular">Circular</option>
+                <option value="Cuadrada">Cuadrada</option>
+                <option value="Individual">Individual</option>
+            </select>
+        </div>
+
+        <div class="products-grid" id="grid-productos-target" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; padding: 20px;">
+        </div>
+
+        <div style="text-align: center; margin: 40px 0;">
+            <p style="font-weight: bold; margin-bottom: 5px;">Compartir:</p>
+            <a href="https://wa.me/?text=¡Mira%20este%20catálogo!%20http://1000sabores.cl" target="_blank" style="margin: 0 10px; font-size: 24px; color: #25D366;">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://1000sabores.cl" target="_blank" style="margin: 0 10px; font-size: 24px; color: #3b5998;">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </div>
     </main>
 
-    <div id="cart-sidebar" style="position: fixed; top: 0; right: -400px; width: 380px; height: 100%; background-color: #ffffff; box-shadow: -5px 0 15px rgba(0,0,0,0.15); z-index: 10000; transition: right 0.3s ease; padding: 20px; border-left: 3px solid #FFC0CB; overflow-y: auto;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <h3 style="margin: 0; color: #8B4513;"><i class="fas fa-shopping-cart"></i> Tu Carrito</h3>
-            <button id="close-cart-btn" style="background: none; border: none; font-size: 26px; cursor: pointer;">&times;</button>
-        </div>
-        <div id="cart-items-container"></div>
-        <div style="margin-top: 20px; border-top: 2px solid #FFC0CB; padding-top: 15px;">
-            <div style="font-weight: bold; color: #8B4513; font-size: 18px; margin-bottom: 15px;">
-                Total: <span id="cart-total-amount">$0 CLP</span>
-            </div>
-            <button onclick="window.location.href='pago.html'" style="width: 100%; background-color: #8B4513; color: white; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
-                Proceder al Pago
-            </button>
-        </div>
-    </div>
-
-    <script src="js/datos.js"></script>
+    <script src="js/productos.js"></script>
     <script src="js/carrito.js"></script>
     
     <script>
-        const container = document.getElementById('grid-productos-target');
-        if (typeof listadoProductos !== 'undefined') {
-            listadoProductos.forEach(prod => {
+        function renderizarProductos() {
+            const containerGrid = document.getElementById('grid-productos-target');
+            const filtro = document.getElementById('filtro-forma').value;
+            containerGrid.innerHTML = ''; 
+
+            const productosFiltrados = filtro === 'Todos' ? listadoProductos : listadoProductos.filter(p => p.forma === filtro);
+
+            productosFiltrados.forEach(prod => {
                 const card = document.createElement('div');
-                card.style.background = '#fff'; card.style.padding = '15px'; card.style.borderRadius = '10px'; card.style.border = '1px solid #FFC0CB';
+                card.className = 'product-card';
+                card.style = "border: 1px solid #ddd; padding: 15px; border-radius: 10px; background: #fff;";
+                
                 card.innerHTML = `
-                    <img src="${prod.imagen}" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
-                    <h3 style="color:#8B4513;">${prod.nombre}</h3>
-                    <p><strong>$${prod.precio.toLocaleString('es-CL')}</strong></p>
-                    <button onclick="agregarAlCarrito('${prod.codigo}')" style="width:100%; background:#FFC0CB; border:none; padding:10px; cursor:pointer; border-radius:5px; font-weight:bold; color:#8B4513;">Añadir al Carrito</button>
-                    <div style="margin-top:10px; text-align:center;">
-                        <small>Compartir:</small><br>
-                        <a href="https://wa.me/?text=Mira esta torta: ${prod.nombre}" target="_blank" style="margin:0 5px; color:#25D366;"><i class="fab fa-whatsapp"></i></a>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=index.html" target="_blank" style="margin:0 5px; color:#4267B2;"><i class="fab fa-facebook"></i></a>
+                    <img src="${prod.imagen}" style="width:100%; height:150px; object-fit:cover; border-radius:6px;">
+                    <h3>${prod.nombre}</h3>
+                    <p><strong>Forma:</strong> ${prod.forma}</p>
+                    
+                    <select id="tamano-${prod.codigo}" style="width:100%; margin-bottom:5px;">
+                        ${prod.tamanos.map(t => `<option value="${t}">${t}</option>`).join('')}
+                    </select>
+
+                    <input type="text" id="mensaje-${prod.codigo}" placeholder="Mensaje especial..." style="width:90%; margin-bottom:10px; padding: 5px;">
+
+                    <p style="font-weight: bold; color: var(--accent-choco);">$${prod.precio.toLocaleString('es-CL')} CLP</p>
+                    
+                    <div style="margin-bottom: 10px; text-align: center;">
+                        <span style="font-size: 12px; color: #666;">Compartir:</span>
+                        <a href="https://wa.me/?text=Mira%20esta%20torta:%20${prod.nombre}%20a%20$${prod.precio}" target="_blank" style="margin: 0 5px; color: #25D366; font-size: 18px;">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=http://1000sabores.cl" target="_blank" style="margin: 0 5px; color: #3b5998; font-size: 18px;">
+                            <i class="fab fa-facebook"></i>
+                        </a>
                     </div>
+
+                    <button class="btn-action" onclick="agregarConPersonalizacion('${prod.codigo}')" style="width: 100%; cursor:pointer; border:none;">
+                        <i class="fas fa-shopping-cart"></i> Añadir al Carrito
+                    </button>
                 `;
-                container.appendChild(card);
+                containerGrid.appendChild(card);
             });
         }
+
+        function agregarConPersonalizacion(codigo) {
+            const tamano = document.getElementById(`tamano-${codigo}`).value;
+            const mensaje = document.getElementById(`mensaje-${codigo}`).value;
+            
+            console.log(`Agregando ${codigo}: Tamaño ${tamano}, Mensaje: "${mensaje}"`);
+            alert("Producto añadido al carrito con personalización.");
+        }
+
+        renderizarProductos();
     </script>
+    
 </body>
 </html>

@@ -2,72 +2,75 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pastelería 1000 Sabores</title>
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        body { margin: 0; font-family: 'Arial', sans-serif; background-color: #FFF5E1; color: #4B3621; }
-        
-        /* Barra de navegación unificada */
-        nav { background-color: #3e2723; padding: 20px; display: flex; justify-content: space-between; align-items: center; color: white; }
-        nav .logo { font-size: 1.5rem; font-weight: bold; }
-        nav ul { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
-        nav ul li a { color: white; text-decoration: none; font-weight: bold; }
-        
-        /* Contenedor principal */
-        .container { max-width: 1000px; margin: auto; padding: 40px 20px; }
-        .hero { text-align: center; padding: 60px 20px; }
-        .section-box { background: white; padding: 30px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-    </style>
 </head>
 <body>
+    <header>
+        <nav class="nav-container">
+            <a href="index.html" style="font-size: 1.5rem; font-family: 'Pacifico';"> Pastelería 1000 Sabores</a>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="productos.html">Productos</a>
+                <a href="#registro">Registro</a>
+                <a href="#contacto">Contacto</a>
+                <a href="carrito.html"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </nav>
+    </header>
 
-    <nav>
-        <div class="logo">Pastelería 1000 Sabores</div>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="productos.html">Productos</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
-        </ul>
-        <div style="background: #f8bbd0; padding: 8px 15px; border-radius: 5px; color: #4b3621;">
-            <i class="fas fa-shopping-cart"></i> (2)
+    <section style="text-align: center;">
+        <h1>Tradición y Dulzura</h1>
+        <p>Bienvenidos a 1000 Sabores. Artesanía desde 1995.</p>
+        
+        <div style="display: flex; flex-direction: column; gap: 15px; align-items: center; margin-top: 25px;">
+            <div style="display: flex; gap: 15px;">
+                <a href="productos.html" class="btn-action" style="background-color: var(--accent-choco) !important; color: white !important;">
+                    <i class="fas fa-birthday-cake"></i> Ver Catálogo de Ventas
+                </a>
+            </div>
+            <a href="#modal-horarios" class="btn-action" style="background-color: var(--accent-pink) !important; color: var(--text-primary) !important; padding: 10px 40px;">
+                <i class="far fa-clock"></i> Ver Horarios
+            </a>
         </div>
-    </nav>
-
-    <div class="container">
-        <section class="hero">
-            <h1>Pastelería 1000 Sabores</h1>
-            <p>Tradición, calidad y dulzura en cada bocado.</p>
-        </section>
-
-        <div class="section-box">
-            <h3><i class="fas fa-birthday-cake"></i> Nuestra Historia</h3>
-            <p>Referente en repostería chilena desde 1995, creando la torta más grande del mundo.</p>
-            
-            <h3><i class="fas fa-heart"></i> Misión</h3>
-            <p>Ofrecer experiencias dulces memorables con productos de la más alta calidad.</p>
-            
-            <h3><i class="fas fa-eye"></i> Visión</h3>
-            <p>Ser la tienda online líder, reconocida por nuestra innovación y formación de nuevos talentos.</p>
-        </div>
-
-        <div style="display: flex; gap: 20px; justify-content: center; margin-bottom: 40px;">
-            <a href="productos.html" style="background:#5D4037; color:white; padding:15px 30px; text-decoration:none; border-radius:8px;">Ver Catálogo</a>
-            <a href="#horarios" style="background:#F8BBD0; color:#4B3621; padding:15px 30px; text-decoration:none; border-radius:8px;">Ver Horarios</a>
-        </div>
-
-        <div class="section-box" style="border: 1px solid #F8BBD0;">
-            <h2>Rincón del Aprendiz</h2>
-            <p>Consejos de nuestros estudiantes de gastronomía.</p>
-            <ul>
-                <li>Técnicas de Temperado</li>
-                <li>Receta: Merengue Italiano</li>
-                <li>Tendencias Repostería 2026</li>
-            </ul>
-            <a href="blog.html" style="color: #E1306C; font-weight: bold;">Ir a Comunidad →</a>
+        <div id="modal-horarios" class="modal-window">
+        <div class="modal-content">
+            <a href="#" class="modal-close" style="position: absolute; top: 10px; right: 15px; font-size: 20px; text-decoration: none; color: var(--text-primary);">&times;</a>
+            <h2 style="color: var(--accent-choco);">Horarios de Atención</h2>
+            <p>Lunes a Viernes: 09:00 - 20:00 hrs.</p>
+            <p>Sábados y Domingos: 10:00 - 18:00 hrs.</p>
         </div>
     </div>
+    </section>
 
+    <main>
+        <section>
+            <h2>Nuestra Historia</h2>
+            <p>Desde 1995, nuestras recetas familiares han sido el corazón de nuestra pastelería.</p>
+        </section>
+
+        <!-- Nueva Sección Contacto -->
+        <section id="dirección">
+            <h2>Dirección</h2>
+            <p>Violeta Parra 1028 o  escríbenos a contacto@1000sabores.cl.</p>
+        </section>
+    </main>
+
+    <!-- Sección Compartir -->
+    <div style="text-align: center; margin: 20px 0;">
+        <p style="font-weight: bold; margin-bottom: 5px;">Compartir:</p>
+        <a href="https://wa.me/?text=¡Mira%20esta%20pastelería!%20http://1000sabores.cl" target="_blank" style="margin: 0 10px; font-size: 24px; color: #25D366;">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=http://1000sabores.cl" target="_blank" style="margin: 0 10px; font-size: 24px; color: #3b5998;">
+            <i class="fab fa-facebook"></i>
+        </a>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Pastelería 1000 Sabores. Todos los derechos reservados.</p>
+    </footer>
+    
 </body>
 </html>

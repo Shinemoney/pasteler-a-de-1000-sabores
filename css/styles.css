@@ -1,81 +1,71 @@
-/* ==========================================================================
-   1. VARIABLES DE COLORES Y FUENTES (Oficiales según documento)
-   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Pacifico&display=swap');
+
 :root {
-    --choco: #8B4513;        /* Chocolate - Principal */
-    --pink: #FFC0CB;         /* Rosa Suave - Acentos */
-    --crema: #FFF5E1;        /* Crema Pastel - Fondo */
-    --gris: #B0BEC5;         /* Gris Claro - Texto secundario */
-    --text-main: #5D4037;    /* Marrón Oscuro - Texto principal */
+    --bg-cream: #FFF5E1;
+    --accent-pink: #FFC0CB;
+    --accent-choco: #8B4513;
+    --text-primary: #5D4037;
+    --white: #ffffff;
 }
-
-/* ==========================================================================
-   2. CONFIGURACIÓN GLOBAL
-   ========================================================================== */
-/* Importación de fuentes oficiales */
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap');
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    background-color: var(--crema);
+    background-color: var(--bg-cream);
     font-family: 'Lato', sans-serif;
-    color: var(--text-main);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    color: var(--text-primary);
+    margin: 0;
 }
 
-h1, h2, h3, h4 { font-family: 'Pacifico', cursive; color: var(--choco); }
+/* Encabezado */
+header { background-color: var(--accent-choco); padding: 20px 0; }
+.nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+nav a { color: var(--accent-pink) !important; text-decoration: none !important; font-weight: bold; margin: 0 10px; }
+nav a:hover { color: var(--white) !important; }
 
-a { text-decoration: none; color: var(--choco); transition: 0.3s; }
-a:hover { color: var(--pink); }
+/* Tipografía */
+h1, h2, h3, .logo { font-family: 'Pacifico', cursive; color: var(--accent-choco); }
 
-/* ==========================================================================
-   3. ENCABEZADO Y BOTONES
-   ========================================================================== */
-header { background-color: var(--choco); padding: 20px; color: var(--crema); }
+/* Secciones */
+section { background: rgba(255, 255, 255, 0.5); padding: 40px 20px; margin: 20px auto; max-width: 1100px; border-radius: 10px; }
+.btn-action { background-color: var(--accent-pink) !important; color: var(--text-primary) !important; padding: 10px 20px; border-radius: 6px; font-weight: bold; }
+.btn-action:hover { background-color: var(--accent-choco) !important; color: var(--white) !important; }
 
-.btn-action {
-    background-color: var(--pink);
-    color: var(--choco);
-    padding: 12px 30px;
-    border-radius: 5px;
-    font-weight: bold;
-    display: inline-block;
+footer { background-color: var(--accent-choco); color: var(--white); text-align: center; padding: 20px; margin-top: 40px; }
+
+/* Estilo del modal */
+.modal-window {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
-.btn-action:hover { background-color: var(--choco); color: var(--crema); }
-
-/* ==========================================================================
-   4. CATÁLOGO Y TARJETAS
-   ========================================================================== */
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 30px;
-    padding: 40px 20px;
+.modal-window:target {
+    display: flex; /* Se muestra cuando se hace clic en #modal-horarios */
 }
-
-.product-card {
-    background-color: white;
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-    border: 2px solid var(--pink);
-    transition: 0.3s;
-}
-
-.product-card:hover { transform: scale(1.05); }
-
-/* ==========================================================================
-   5. FOOTER Y MODALES
-   ========================================================================== */
-footer { background-color: var(--choco); color: var(--crema); padding: 40px; text-align: center; }
 
 .modal-content {
-    background: var(--crema);
-    border: 3px solid var(--pink);
+    background: #fffdf5; /* Color crema similar a la imagen */
     padding: 30px;
-    border-radius: 15px;
+    border-radius: 10px;
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    border: 2px solid var(--accent-choco);
+}
+
+.modal-close {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    font-size: 24px;
+    color: var(--accent-choco);
+    text-decoration: none;
+    font-weight: bold;
 }
