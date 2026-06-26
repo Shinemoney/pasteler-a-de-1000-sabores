@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Pastelería 1000 Sabores</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header Unificado -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand">Pastelería 1000 Sabores</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="productos.html">Productos</a>
+                <a href="registro.html">Registro</a>
+                <a href="blog.html">Blog</a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
+            <div class="nav-cart">
+                <a href="carrito.html"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <main style="padding-top: 120px; padding-bottom: 50px; display: flex; justify-content: center;">
+        <section class="profile-section" style="width: 90%; max-width: 600px; background: white; padding: 40px; border-radius: 15px; border: 2px solid var(--accent-pink); box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h2 style="color: var(--accent-choco); text-align: center; margin-bottom: 30px;">Mi Perfil</h2>
+            
+            <div style="text-align: center; margin-bottom: 30px;">
+                <i class="fas fa-user-circle" style="font-size: 80px; color: var(--accent-pink);"></i>
+                <h3 style="margin-top: 15px;">Usuario Invitado</h3>
+                <p style="color: #666;">correo@ejemplo.cl</p>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+            <div class="profile-actions" style="display: flex; flex-direction: column; gap: 15px;">
+                <a href="seguimiento.html" style="text-decoration: none; color: var(--accent-choco); font-weight: bold; padding: 10px; border: 1px solid var(--accent-pink); border-radius: 6px; text-align: center;">
+                    <i class="fas fa-box"></i> Ver mis pedidos
+                </a>
+                <button onclick="cerrarSesion()" style="background: none; border: 1px solid #e1306c; color: #e1306c; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold;">
+                    Cerrar Sesión
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function cerrarSesion() {
+            if(confirm("¿Estás seguro de que deseas cerrar sesión?")) {
+                localStorage.clear();
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>

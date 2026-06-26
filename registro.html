@@ -8,84 +8,68 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div id="nav-placeholder"></div>
 
-    <section class="form-section" style="padding: 60px 0; display: flex; justify-content: center;">
-        <div class="form-wrapper" style="max-width: 600px; width: 100%; background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.05); border: 1px solid #FFC0CB;">
-            
-            <h2 style="color: #8B4513; margin-bottom: 5px; font-size: 2rem;">
-                Registro de Usuario
-            </h2>
-            <p style="margin-bottom: 20px; color: #5D4037; font-size: 0.9rem; font-style: italic;">
-                Únete a nuestra tradición de 50 años (desde 1995) y disfruta de beneficios exclusivos.
-            </p>
-            
-            <form id="form-registro" novalidate style="display: flex; flex-direction: column; gap: 18px; text-align: left;">
-                
-                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                    <label style="font-weight: 600; color: #8B4513;">RUN (Sin puntos ni guion)</label>
-                    <input type="text" id="reg-run" placeholder="19011022K" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; width: 100%;">
-                    <div class="error-text" id="err-reg-run" style="color: #e1306c; font-size: 14px; display: none; font-weight: 500; margin-top: 2px;">RUN es requerido.</div>
-                </div>
-                
-                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                    <label style="font-weight: 600; color: #8B4513;">Fecha de Nacimiento</label>
-                    <input type="date" id="reg-fecha-nac" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; width: 100%;">
-                    <div class="error-text" id="err-reg-fecha-nac" style="color: #e1306c; font-size: 14px; display: none; font-weight: 500; margin-top: 2px;">La fecha es requerida.</div>
-                </div>
-                
-                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                    <label style="font-weight: 600; color: #8B4513;">Nombre</label>
-                    <input type="text" id="reg-nombre" placeholder="Nombre" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; width: 100%;">
-                </div>
-                
-                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                    <label style="font-weight: 600; color: #8B4513;">Correo Electrónico</label>
-                    <input type="email" id="reg-email" placeholder="correo@gmail.com" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; width: 100%;">
-                </div>
-
-                <!-- Campo Código -->
-                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                    <label style="font-weight: 600; color: #8B4513;">Código de Descuento (Opcional)</label>
-                    <input type="text" id="reg-codigo" placeholder="Ej: FELICES50" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; width: 100%;">
-                <div class="error-text" id="err-reg-codigo" style="color: #e1306c; font-size: 14px; display: none; font-weight: 500; margin-top: 2px;">Código inválido.</div>
-                </div>
-
-            <!-- Campo Correo Duoc -->
-                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                    <label style="font-weight: 600; color: #8B4513;">Correo Institucional (Estudiantes Duoc)</label>
-                    <input type="email" id="reg-email-duoc" placeholder="estudiante@duocuc.cl" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; width: 100%;">
-                <div class="error-text" id="err-reg-email-duoc" style="color: #e1306c; font-size: 14px; display: none; font-weight: 500; margin-top: 2px;">Correo institucional inválido.</div>
-                </div>
-                <!-- Fin campos -->
-
-                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                    <label style="font-weight: 600; color: #8B4513;">Contraseña</label>
-                    <input type="password" id="reg-pass" placeholder="********" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; width: 100%;">
-                </div>
-
-                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                    <label style="font-weight: 600; color: #8B4513;">Región</label>
-                    <select id="miRegion" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px;"></select>
-                </div>
-
-                <div class="form-group" style="display: flex; flex-direction: column; gap: 6px;">
-                    <label style="font-weight: 600; color: #8B4513;">Comuna</label>
-                    <select id="miComuna" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px;"></select>
-                </div>
-
-                <button type="submit" class="btn-action" style="padding: 12px; border: none; cursor: pointer; font-size: 16px; margin-top: 10px; background-color: #FFC0CB; color: #8B4513; border-radius: 6px; font-weight: bold;">
-                    Registrar Cuenta
-                </button>
-            </form>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand">Pastelería 1000 Sabores</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="productos.html">Productos</a>
+                <a href="registro.html">Registro</a>
+                <a href="blog.html">Blog</a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
+            <div class="nav-cart">
+                <a href="#" id="open-cart-trigger" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-shopping-cart"></i> (<span id="cart-count">0</span>)
+                </a>
+            </div>
         </div>
-    </section>
+    </header>
 
-    <script src="js/validaciones.js"></script>
+    <main style="padding-top: 120px; display: flex; justify-content: center; padding-bottom: 50px;">
+        <section class="form-section" style="width: 90%; max-width: 600px;">
+            <div class="form-wrapper" style="background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.05); border: 1px solid #FFC0CB;">
+                
+                <h2 style="color: #8B4513; margin-bottom: 25px; text-align: center;">Registro de Usuario</h2>
+                
+                <form id="form-registro" novalidate style="display: flex; flex-direction: column; gap: 15px;">
+                    <div class="form-group"><label>RUN</label><input type="text" id="reg-run" placeholder="19011022K" style="width: 100%; padding: 10px; border: 1px solid #FFC0CB; border-radius: 6px;"></div>
+                    <div class="form-group"><label>Nombre</label><input type="text" id="reg-nombre" placeholder="Nombre" style="width: 100%; padding: 10px; border: 1px solid #FFC0CB; border-radius: 6px;"></div>
+                    <div class="form-group"><label>Apellido</label><input type="text" id="reg-apellidos" placeholder="Apellido" style="width: 100%; padding: 10px; border: 1px solid #FFC0CB; border-radius: 6px;"></div>
+                    <div class="form-group"><label>Fecha de nacimiento</label><input type="date" id="reg-fecha" style="width: 100%; padding: 10px; border: 1px solid #FFC0CB; border-radius: 6px;"></div>
+                    <div class="form-group"><label>Correo Electrónico</label><input type="email" id="reg-email" placeholder="correo@gmail.com" style="width: 100%; padding: 10px; border: 1px solid #FFC0CB; border-radius: 6px;"></div>
+                    <div class="form-group"><label>Correo institucional</label><input type="email" id="reg-email-inst" placeholder="nombre@duocuc.cl" style="width: 100%; padding: 10px; border: 1px solid #FFC0CB; border-radius: 6px;"></div>
+                    <div class="form-group"><label>Código de Descuento</label><input type="text" id="reg-codigo" placeholder="FELICES50" style="width: 100%; padding: 10px; border: 1px solid #FFC0CB; border-radius: 6px;"></div>
+                    <div class="form-group"><label>Región</label><select id="reg-region" style="width: 100%; padding: 10px; border: 1px solid #FFC0CB; border-radius: 6px;"><option value="">Seleccione Región</option></select></div>
+                    <div class="form-group"><label>Comuna</label><select id="reg-comuna" style="width: 100%; padding: 10px; border: 1px solid #FFC0CB; border-radius: 6px;"><option value="">Seleccione Comuna</option></select></div>
+                    <div class="form-group"><label>Dirección</label><input type="text" id="reg-direccion" placeholder="Calle y número" style="width: 100%; padding: 10px; border: 1px solid #FFC0CB; border-radius: 6px;"></div>
+
+                    <button type="submit" style="margin-top: 10px; padding: 12px; background: #FFC0CB; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; color: #8B4513;">
+                        Registrarse
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <div id="cart-sidebar" style="position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background: white; z-index: 9999; box-shadow: -2px 0 10px rgba(0,0,0,0.2); transition: 0.3s; padding: 20px; overflow-y: auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="color: #8B4513;">Mi Carrito</h3>
+            <button id="close-cart-btn" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+        </div>
+        <div id="cart-items-container" style="margin-top: 20px;"></div>
+        <div id="cart-total-amount" style="font-weight: bold; font-size: 1.2rem; margin: 20px 0; color: #8B4513;"></div>
+    </div>
+
+    <script src="js/datos.js"></script>
+    <script src="js/carrito.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            iniciarSelectores('miRegion', 'miComuna');
+        // Inicializar regiones al cargar
+        document.addEventListener("DOMContentLoaded", () => {
+            iniciarSelectores('reg-region', 'reg-comuna');
         });
     </script>
+    <script src="js/validaciones.js"></script>
 </body>
 </html>

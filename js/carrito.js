@@ -1,104 +1,116 @@
-// js/carrito.js - Versión Completa y Optimizada
+// --- Lógica del Carrito ---
 
-let carrito = JSON.parse(localStorage.getItem('carrito_sabores')) || [];
-
-document.addEventListener("DOMContentLoaded", () => {
-    renderizarNav();
-    actualizarBadge();
+// Inicializar al cargar
+document.addEventListener('DOMContentLoaded', () => {
     renderizarCarrito();
-
-    // Delegación de eventos (Funciona aunque los elementos se creen dinámicamente)
-    document.body.addEventListener("click", (e) => {
-        // Abrir Carrito
-        if (e.target.closest('#open-cart-trigger')) {
-            e.preventDefault();
-            document.getElementById('cart-sidebar').style.right = '0';
-        }
-        // Cerrar Carrito
-        if (e.target.closest('#close-cart-btn')) {
-            document.getElementById('cart-sidebar').style.right = '-400px';
-        }
-    });
 });
 
-// 1. Renderizado de Navegación
-function renderizarNav() {
-    const navPlaceholder = document.getElementById('nav-placeholder');
-    if (navPlaceholder) {
-        navPlaceholder.innerHTML = `
-        <header style="background-color: #4B3621; padding: 20px 0;">
-            <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-                <a href="index.html" style="color: #FFF5E1; text-decoration: none; font-size: 20px; font-weight: bold;">Pastelería 1000 Sabores</a>
-                <nav>
-                    <ul style="list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; align-items: center;">
-                        <li><a href="index.html" style="color: #FFF5E1; text-decoration: none;">Home</a></li>
-                        <li><a href="productos.html" style="color: #FFF5E1; text-decoration: none;">Productos</a></li>
-                        <li>
-                            <a href="#" id="open-cart-trigger" style="background-color: #FFC0CB; color: #8B4513; padding: 10px 15px; border-radius: 5px; text-decoration: none; font-weight: bold;">
-                                <i class="fas fa-shopping-cart"></i> (<span id="cart-count">0</span>)
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </header>`;
-    }
+// 1. Lógica para abrir/cerrar carrito
+const trigger = document.getElementById('open-cart-trigger');
+if (trigger) {
+    trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('cart-sidebar').style.right = '0';
+        renderizarCarrito();
+    });
 }
 
-// 2. Gestión de Carrito
-function agregarAlCarrito(codigoProducto) {
-    const productoBase = listadoProductos.find(p => p.codigo === codigoProducto);
-    if (!productoBase) return;
+// Cierre del sidebar del carrito
+const closeBtn = document.getElementById('close-cart-btn');
+if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+        document.getElementById('cart-sidebar').style.right = '-400px';
+    });
+}
 
-    const existe = carrito.find(item => item.codigo === codigoProducto);
-    if (existe) {
-        existe.cantidad += 1;
+// 2. Función para agregar productos (LLAMA A ESTA DESDE TUS BOTONES)
+function agregarAlCarrito(nombre, precio, tamano) {
+    let carrito = JSON.parse(localStorage.getItem('carrito_sabores')) || [];
+    
+    // Convertir precio a número y validar
+    const precioNumerico = parseFloat(precio) || 0;
+    
+    let index = carrito.findIndex(item => item.nombre === nombre && item.tamano === tamano);
+    
+    if (index !== -1) {
+        carrito[index].cantidad = (parseInt(carrito[index].cantidad) || 0) + 1;
     } else {
-        carrito.push({ ...productoBase, cantidad: 1 });
+        carrito.push({ 
+            nombre: nombre, 
+            precio: precioNumerico, 
+            tamano: tamano || "Sin especificar", 
+            cantidad: 1 
+        });
     }
-    guardarYActualizar();
-    alert(productoBase.nombre + " añadido al carrito.");
-}
-
-function modificarCantidad(codigo, delta) {
-    const item = carrito.find(p => p.codigo === codigo);
-    if (item) {
-        item.cantidad += delta;
-        if (item.cantidad <= 0) {
-            carrito = carrito.filter(p => p.codigo !== codigo);
-        }
-    }
-    guardarYActualizar();
-}
-
-function guardarYActualizar() {
+    
     localStorage.setItem('carrito_sabores', JSON.stringify(carrito));
-    actualizarBadge();
+    alert(nombre + " agregado al carrito");
     renderizarCarrito();
 }
 
-function actualizarBadge() {
-    const count = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-    const badge = document.getElementById('cart-count');
-    if (badge) badge.textContent = count;
-}
-
+// 3. Función principal para calcular y mostrar
 function renderizarCarrito() {
     const container = document.getElementById('cart-items-container');
-    const totalEl = document.getElementById('cart-total-amount');
-    if (!container) return;
+    const totalContainer = document.getElementById('cart-total-amount');
+    const countSpan = document.getElementById('cart-count');
+    const carrito = JSON.parse(localStorage.getItem('carrito_sabores')) || [];
+    
+    if (!container || !totalContainer) return;
 
-    container.innerHTML = carrito.map(item => `
-        <div style="display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid #eee; padding: 10px 0;">
-            <div><strong>${item.nombre}</strong><br>$${item.precio.toLocaleString('es-CL')}</div>
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <button onclick="modificarCantidad('${item.codigo}', -1)" style="cursor:pointer;">-</button>
-                <span>${item.cantidad}</span>
-                <button onclick="modificarCantidad('${item.codigo}', 1)" style="cursor:pointer;">+</button>
+    container.innerHTML = '';
+    let subtotal = 0;
+    
+    carrito.forEach((item, index) => {
+        const precio = parseFloat(item.precio) || 0;
+        const cantidad = parseInt(item.cantidad) || 0;
+        subtotal += (precio * cantidad);
+        
+        container.innerHTML += `
+            <div style="border-bottom: 1px solid #eee; padding: 10px 0;">
+                <div style="font-weight: bold;">${item.nombre}</div>
+                <div style="font-size: 0.8rem; color: #666;">Tamaño: ${item.tamano}</div>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 5px;">
+                    <div>$${precio.toLocaleString('es-CL')}</div>
+                    <div>
+                        <button onclick="cambiarCantidad(${index}, -1)" style="padding: 2px 8px;">-</button>
+                        <span>${cantidad}</span>
+                        <button onclick="cambiarCantidad(${index}, 1)" style="padding: 2px 8px;">+</button>
+                    </div>
+                </div>
             </div>
-        </div>
-    `).join('');
+        `;
+    });
 
-    const total = carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
-    if (totalEl) totalEl.textContent = `$${total.toLocaleString('es-CL')} CLP`;
+    // Calcular descuento
+    const codigoAplicado = localStorage.getItem('codigo_aplicado');
+    let descuento = (codigoAplicado === 'FELICES50') ? (subtotal * 0.5) : 0;
+    let totalFinal = subtotal - descuento;
+
+    // Mostrar totales
+    if (descuento > 0) {
+        totalContainer.innerHTML = `
+            <div style="font-size: 0.9rem; color: #555;">Subtotal: $${subtotal.toLocaleString('es-CL')}</div>
+            <div style="color: #27ae60; font-size: 0.9rem;">Descuento (50%): -$${descuento.toLocaleString('es-CL')}</div>
+            <div style="font-size: 1.3rem; border-top: 1px solid #ccc; padding-top: 5px; color: #8B4513;">Total: $${totalFinal.toLocaleString('es-CL')} CLP</div>
+        `;
+    } else {
+        totalContainer.innerHTML = `<div style="font-size: 1.3rem; margin-top: 10px; color: #8B4513;">Total: $${subtotal.toLocaleString('es-CL')} CLP</div>`;
+    }
+
+    if (countSpan) {
+        countSpan.textContent = carrito.reduce((sum, item) => sum + (parseInt(item.cantidad) || 0), 0);
+    }
+}
+
+// 4. Función para cambiar cantidades
+function cambiarCantidad(index, delta) {
+    let carrito = JSON.parse(localStorage.getItem('carrito_sabores')) || [];
+    carrito[index].cantidad = (parseInt(carrito[index].cantidad) || 0) + delta;
+    
+    if (carrito[index].cantidad <= 0) {
+        carrito.splice(index, 1);
+    }
+    
+    localStorage.setItem('carrito_sabores', JSON.stringify(carrito));
+    renderizarCarrito();
 }

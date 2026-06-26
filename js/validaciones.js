@@ -1,22 +1,18 @@
-// Definición de reglas básicas para formularios
+// Funciones de validación
+const noVacio = (valor) => valor && valor.trim() !== '';
+const esEmail = (valor) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor);
+const esCorreoDuoc = (valor) => valor.endsWith('@duocuc.cl');
+
 const reglasConfig = {
     'form-registro': [
         { id: 'reg-run', validar: noVacio, mensaje: 'RUN es requerido' },
         { id: 'reg-nombre', validar: noVacio, mensaje: 'Nombre es requerido' },
         { id: 'reg-apellidos', validar: noVacio, mensaje: 'Apellidos son requeridos' },
         { id: 'reg-email', validar: esEmail, mensaje: 'Ingrese un correo válido' },
-        { id: 'reg-pass', validar: noVacio, mensaje: 'La contraseña es requerida' },
-        { id: 'reg-pass-conf', validar: noVacio, mensaje: 'Debe confirmar su contraseña' },
-        { id: 'miRegion', validar: noVacio, mensaje: 'Debe seleccionar una región' },
-        { id: 'miComuna', validar: noVacio, mensaje: 'Debe seleccionar una comuna' },
-        { id: 'reg-dir', validar: noVacio, mensaje: 'Dirección es requerida' },
-        { id: 'reg-fecha-nac', validar: noVacio, mensaje: 'Fecha de nacimiento es requerida' },
-        { id: 'reg-codigo', validar: () => true, mensaje: '' },
-        { id: 'reg-email-duoc', validar: (v) => v === '' || esCorreoDuoc(v), mensaje: 'Correo institucional inválido' }
-    ],
-    'form-login': [
-        { id: 'login-email', validar: esEmail, mensaje: 'Ingrese un correo válido' },
-        { id: 'login-pass', validar: noVacio, mensaje: 'La contraseña es obligatoria' }
+        { id: 'reg-email-inst', validar: (v) => v === '' || esCorreoDuoc(v), mensaje: 'Institucional debe ser @duocuc.cl' },
+        { id: 'reg-region', validar: noVacio, mensaje: 'Seleccione una región' },
+        { id: 'reg-comuna', validar: noVacio, mensaje: 'Seleccione una comuna' },
+        { id: 'reg-direccion', validar: noVacio, mensaje: 'Dirección es requerida' }
     ],
     'form-contacto': [
         { id: 'cont-nombre', validar: noVacio, mensaje: 'El nombre es obligatorio' },
@@ -37,42 +33,40 @@ function inicializarFormulario(formId, successId) {
 
         reglas.forEach(regla => {
             const campo = document.getElementById(regla.id);
-            const errorDiv = document.getElementById('err-' + regla.id);
-            if (campo && !regla.validar(campo.value)) {
-                campo.style.borderColor = '#e1306c';
-                if(errorDiv) {
-                    errorDiv.textContent = regla.mensaje;
-                    errorDiv.style.display = 'block';
+            if (campo) {
+                if (!regla.validar(campo.value)) {
+                    campo.style.borderColor = '#e1306c';
+                    esValido = false;
+                } else {
+                    campo.style.borderColor = '#ccc';
                 }
-                esValido = false;
-            } else if (campo) {
-                campo.style.borderColor = '#ccc';
-                if(errorDiv) errorDiv.style.display = 'none';
             }
         });
 
         if (esValido) {
+            // Lógica de descuento solo en registro
             if (formId === 'form-registro') {
-                if (document.getElementById('reg-pass').value !== document.getElementById('reg-pass-conf').value) {
-                    const confError = document.getElementById('err-reg-pass-conf');
-                    confError.textContent = "Las contraseñas no coinciden";
-                    confError.style.display = 'block';
-                    return;
+                const codigo = document.getElementById('reg-codigo').value.trim();
+                if (codigo === 'FELICES50') {
+                    localStorage.setItem('codigo_aplicado', 'FELICES50');
+                } else {
+                    localStorage.removeItem('codigo_aplicado');
                 }
-                // Aquí podrías guardar otros datos adicionales en el objeto usuario
-                localStorage.setItem('usuarioRegistrado', JSON.stringify({ email: document.getElementById('reg-email').value }));
             }
-            if(successBanner) successBanner.style.display = 'block';
+
+            if(successBanner) {
+                successBanner.style.display = 'block';
+                successBanner.textContent = "¡Enviado con éxito!";
+            }
             form.reset();
-            if(formId === 'form-registro' && typeof iniciarSelectores === 'function') iniciarSelectores('miRegion', 'miComuna');
-            setTimeout(() => { if(successBanner) successBanner.style.display = 'none'; }, 5000);
+            setTimeout(() => { if(successBanner) successBanner.style.display = 'none'; }, 4000);
+        } else {
+            alert("Por favor, revisa los campos en rojo.");
         }
     });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     inicializarFormulario('form-registro', 'registro-success');
-    inicializarFormulario('form-login', 'login-success');
     inicializarFormulario('form-contacto', 'contacto-success');
-    if (typeof iniciarSelectores === 'function') iniciarSelectores('miRegion', 'miComuna');
 });

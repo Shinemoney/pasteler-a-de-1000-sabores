@@ -3,109 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Ventas - Pastelería 1000 Sabores</title>
+    <title>Productos - Pastelería 1000 Sabores</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: #FEF5E7; margin: 0;">
 
     <header>
-        <nav class="nav-container">
-            <a href="index.html" style="font-size: 1.5rem; font-family: 'Pacifico';"> Pastelería 1000 Sabores</a>
-            <div>
+        <div class="nav-container">
+            <a href="index.html" class="brand">Pastelería 1000 Sabores</a>
+            <nav class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="productos.html">Productos</a>
-                <a href="index.html#registro">Registro</a>
+                <a href="registro.html">Registro</a>
                 <a href="blog.html">Blog</a>
-                <a href="index.html#contacto">Contacto</a>
-                <a href="carrito.html"><i class="fas fa-shopping-cart"></i></a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
+            <div class="nav-cart">
+                <a href="#" id="open-cart-trigger" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-shopping-cart"></i> (<span id="cart-count">0</span>)
+                </a>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <main class="container" style="padding: 40px 0;">
-        <h1 style="color: var(--accent-choco); text-align: center;">Catálogo de Productos</h1>
+    <main style="padding-top: 100px; padding-bottom: 50px; max-width: 1000px; margin: 0 auto;">
         
-        <div style="text-align: center; margin: 20px 0;">
-            <select id="filtro-forma" onchange="renderizarProductos()" style="padding: 10px; border-radius: 6px;">
-                <option value="Todos">Todas las formas</option>
-                <option value="Circular">Circular</option>
+        <h1 style="text-align: center; font-family: 'Lobster', cursive; color: #8B4513; font-size: 3rem; margin-bottom: 20px;">
+            Catálogo de Productos
+        </h1>
+        
+        <div style="text-align: center; margin-bottom: 40px;">
+            <select id="filtro-forma" style="padding: 10px; font-size: 1rem; border-radius: 6px; border: 1px solid #ccc; width: 200px;">
+                <option value="todas">Todas las formas</option>
                 <option value="Cuadrada">Cuadrada</option>
-                <option value="Individual">Individual</option>
+                <option value="Circular">Redonda</option>
             </select>
         </div>
 
-        <div class="products-grid" id="grid-productos-target" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; padding: 20px;">
-        </div>
+        <div id="grid-productos-target" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 0 20px;">
+            </div>
 
-        <div style="text-align: center; margin: 40px 0;">
-            <p style="font-weight: bold; margin-bottom: 5px;">Compartir:</p>
-            <a href="https://wa.me/?text=¡Mira%20este%20catálogo!%20http://1000sabores.cl" target="_blank" style="margin: 0 10px; font-size: 24px; color: #25D366;">
-                <i class="fab fa-whatsapp"></i>
-            </a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=http://1000sabores.cl" target="_blank" style="margin: 0 10px; font-size: 24px; color: #3b5998;">
-                <i class="fab fa-facebook"></i>
-            </a>
-        </div>
     </main>
 
-    <script src="js/productos.js"></script>
+    <div id="cart-sidebar" style="position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background: white; z-index: 9999; box-shadow: -2px 0 10px rgba(0,0,0,0.2); transition: 0.3s; padding: 20px; overflow-y: auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="color: #8B4513;">Mi Carrito</h3>
+            <button id="close-cart-btn" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+        </div>
+        <div id="cart-items-container" style="margin-top: 20px;"></div>
+        <div id="cart-total-amount" style="font-weight: bold; font-size: 1.2rem; margin: 20px 0; color: #8B4513;"></div>
+        <a href="pago.html" style="display:block; text-align:center; background:#8B4513; color:white; padding:15px; text-decoration:none; border-radius:6px; font-weight:bold;">
+            Finalizar Pedido
+        </a>
+    </div>
+
     <script src="js/carrito.js"></script>
-    
-    <script>
-        function renderizarProductos() {
-            const containerGrid = document.getElementById('grid-productos-target');
-            const filtro = document.getElementById('filtro-forma').value;
-            containerGrid.innerHTML = ''; 
-
-            const productosFiltrados = filtro === 'Todos' ? listadoProductos : listadoProductos.filter(p => p.forma === filtro);
-
-            productosFiltrados.forEach(prod => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.style = "border: 1px solid #ddd; padding: 15px; border-radius: 10px; background: #fff;";
-                
-                card.innerHTML = `
-                    <img src="${prod.imagen}" style="width:100%; height:150px; object-fit:cover; border-radius:6px;">
-                    <h3>${prod.nombre}</h3>
-                    <p><strong>Forma:</strong> ${prod.forma}</p>
-                    
-                    <select id="tamano-${prod.codigo}" style="width:100%; margin-bottom:5px;">
-                        ${prod.tamanos.map(t => `<option value="${t}">${t}</option>`).join('')}
-                    </select>
-
-                    <input type="text" id="mensaje-${prod.codigo}" placeholder="Mensaje especial..." style="width:90%; margin-bottom:10px; padding: 5px;">
-
-                    <p style="font-weight: bold; color: var(--accent-choco);">$${prod.precio.toLocaleString('es-CL')} CLP</p>
-                    
-                    <div style="margin-bottom: 10px; text-align: center;">
-                        <span style="font-size: 12px; color: #666;">Compartir:</span>
-                        <a href="https://wa.me/?text=Mira%20esta%20torta:%20${prod.nombre}%20a%20$${prod.precio}" target="_blank" style="margin: 0 5px; color: #25D366; font-size: 18px;">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=http://1000sabores.cl" target="_blank" style="margin: 0 5px; color: #3b5998; font-size: 18px;">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                    </div>
-
-                    <button class="btn-action" onclick="agregarConPersonalizacion('${prod.codigo}')" style="width: 100%; cursor:pointer; border:none;">
-                        <i class="fas fa-shopping-cart"></i> Añadir al Carrito
-                    </button>
-                `;
-                containerGrid.appendChild(card);
-            });
-        }
-
-        function agregarConPersonalizacion(codigo) {
-            const tamano = document.getElementById(`tamano-${codigo}`).value;
-            const mensaje = document.getElementById(`mensaje-${codigo}`).value;
-            
-            console.log(`Agregando ${codigo}: Tamaño ${tamano}, Mensaje: "${mensaje}"`);
-            alert("Producto añadido al carrito con personalización.");
-        }
-
-        renderizarProductos();
-    </script>
-    
+    <script src="js/productos.js"></script>
 </body>
 </html>
