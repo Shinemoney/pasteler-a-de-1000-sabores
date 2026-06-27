@@ -4,45 +4,41 @@
     <meta charset="UTF-8">
     <title>Pastelería 1000 Sabores</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css"> <!-- Asegúrate de que este archivo tenga los estilos del footer -->
+    <link rel="stylesheet" href="styles.css">
     <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Arial', sans-serif; background-color: #fdf6f0; padding-top: 90px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; background-color: #fdf6f0; padding-top: 90px; }
 
-    header { 
-        position: fixed; top: 0; left: 0; width: 100%; height: 80px;
-        background-color: #8B4513; 
-        display: flex; align-items: center; justify-content: center;
-        z-index: 9999; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-    
-    .nav-container { 
-        display: flex; align-items: center; justify-content: space-between; 
-        width: 100%; max-width: 1200px; padding: 0 20px; 
-    }
+        header { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 80px;
+            background-color: #8B4513; 
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .nav-container { 
+            display: flex; align-items: center; justify-content: space-between; 
+            width: 100%; max-width: 1200px; padding: 0 20px; 
+        }
 
-    .logo-area { display: flex; align-items: center; gap: 15px; }
-    .logo-area img { height: 50px; width: auto; border-radius: 50%; }
-    .logo-area span { font-family: 'Pacifico', cursive; color: #FFC0CB; font-size: 1.5rem; }
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        .logo-area img { height: 50px; width: auto; border-radius: 50%; }
+        .logo-area span { font-family: 'Pacifico', cursive; color: #FFC0CB; font-size: 1.5rem; }
 
-    /* LINKS ROSADOS */
-    .nav-links { display: flex; gap: 25px; }
-    .nav-links a { 
-        color: #FFC0CB; /* El rosado que querías */
-        font-weight: bold; 
-        text-decoration: none; 
-        font-size: 1.1rem; 
-        transition: color 0.3s;
-    }
-    .nav-links a:hover { color: #ffffff; } /* Blanco al pasar el mouse */
-    
-    .nav-cart { color: #FFC0CB; font-size: 1.2rem; cursor: pointer; }
-    
-    /* TARJETAS */
-    .card-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 20px; max-width: 1000px; margin: auto; }
-    .card { background: white; padding: 25px; border-radius: 15px; border-top: 5px solid #8B4513; cursor: pointer; transition: all 0.3s ease; }
-    .card.seleccionada { background-color: #FFC0CB !important; border-top: 5px solid #ff69b4 !important; }
-</style>
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { 
+            color: #FFC0CB; font-weight: bold; text-decoration: none; 
+            font-size: 1.1rem; transition: color 0.3s;
+        }
+        .nav-links a:hover { color: #ffffff; }
+        
+        /* Corregimos el contenedor del carrito para que sea un link dinámico */
+        .nav-cart { color: #FFC0CB; font-size: 1.2rem; cursor: pointer; }
+        
+        .card-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 20px; max-width: 1000px; margin: auto; }
+        .card { background: white; padding: 25px; border-radius: 15px; border-top: 5px solid #8B4513; cursor: pointer; transition: all 0.3s ease; }
+        .card.seleccionada { background-color: #FFC0CB !important; border-top: 5px solid #ff69b4 !important; }
+    </style>
 </head>
 <body>
 
@@ -63,7 +59,9 @@
             </nav>
 
             <div class="nav-cart">
-                <i class="fas fa-shopping-cart"></i> (5)
+                <a href="#" id="open-cart-trigger" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-shopping-cart"></i> (<span id="cart-count">0</span>)
+                </a>
             </div>
         </div>
     </header>
@@ -89,12 +87,19 @@
         </div>
     </main>
 
-    <!-- AQUÍ ESTÁ EL FOOTER INTEGRADO -->
     <footer>
         <p>&copy; 2026 Pastelería 1000 Sabores.</p>
         <p>Violeta Parra 1234, La Pintana, Santiago, Chile.</p>
     </footer>
 
     <script src="js/carrito.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const totalItems = carrito.reduce((sum, item) => sum + (item.cantidad || 1), 0);
+            document.getElementById('cart-count').innerText = totalItems;
+        });
+    </script>
 </body>
 </html>

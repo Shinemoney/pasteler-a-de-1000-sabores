@@ -134,3 +134,9 @@ footer p {
     font-size: 1rem;
     margin: 5px 0;
 }
+
+#cart-sidebar {
+    position: fixed; top: 0; right: -400px; width: 350px; height: 100%;
+    background: #FFF5E1; z-index: 10001; box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    transition: right 0.4s ease; padding: 20px; overflow-y: auto;
+}

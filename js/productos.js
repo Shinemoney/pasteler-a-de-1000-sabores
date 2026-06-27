@@ -20,7 +20,6 @@ const listadoProductos = [
 function renderizarCatalogo(filtro = "todas") {
     const contenedor = document.getElementById("grid-productos-target");
     if (!contenedor) return;
-    
     contenedor.innerHTML = ""; 
 
     listadoProductos.forEach(prod => {
@@ -28,12 +27,10 @@ function renderizarCatalogo(filtro = "todas") {
 
         const card = document.createElement("div");
         card.style.cssText = "background: white; border-radius: 12px; border: 1px solid #FFC0CB; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 10px;";
-
+        
         card.innerHTML = `
             <img src="${prod.imagen}" alt="${prod.nombre}" style="width: 100%; border-radius: 8px; height: 200px; object-fit: cover;">
-            
             <h3 style="font-family: 'Lobster', cursive; color: #8B4513; margin: 10px 0 0; font-size: 1.5rem;">${prod.nombre}</h3>
-            
             <p style="margin: 0; color: #5D4037; font-size: 1rem;"><strong>Categoría:</strong> ${prod.categoria}</p>
             
             <select id="tamanio-${prod.codigo}" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
@@ -48,7 +45,7 @@ function renderizarCatalogo(filtro = "todas") {
             
             <div style="text-align: center; margin: 5px 0;">
                 <span style="font-size: 0.9rem;">Compartir: </span>
-                <a href="https://wa.me/?text=¡Mira%20esta%20deliciosa%20opción:%20${encodeURIComponent(prod.nombre)}!%20${window.location.href}" target="_blank">
+                <a href="https://wa.me/?text=¡Mira%20esta%20deliciosa%20opción:%20${encodeURIComponent(prod.nombre)}!%20${encodeURIComponent(window.location.href)}" target="_blank">
                     <i class="fab fa-whatsapp" style="color: #25D366; cursor: pointer; margin-right: 10px; font-size: 1.2rem;"></i>
                 </a>
                 <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}" target="_blank">
@@ -56,13 +53,38 @@ function renderizarCatalogo(filtro = "todas") {
                 </a>
             </div>
             
-            <button onclick="agregarAlCarrito('${prod.codigo}')" style="width: 100%; background-color: #FFC0CB; color: #8B4513; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer;">
+            <button onclick="enviarAlCarrito('${prod.nombre}', ${prod.precio}, '${prod.codigo}')" style="width: 100%; background-color: #FFC0CB; color: #8B4513; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer;">
                 <i class="fas fa-shopping-cart"></i> Añadir al Carrito
             </button>
         `;
-        
         contenedor.appendChild(card);
     });
+}
+
+function enviarAlCarrito(nombre, precio, codigo) {
+    const tamano = document.getElementById(`tamanio-${codigo}`).value;
+    const mensaje = document.getElementById(`mensaje-${codigo}`).value;
+    
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    
+    carrito.push({
+        nombre: nombre,
+        precio: precio,
+        tamano: tamano,
+        mensaje: mensaje,
+        cantidad: 1
+    });
+    
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    
+    const cartSidebar = document.getElementById("cart-sidebar");
+    if (cartSidebar) cartSidebar.style.right = "0";
+    
+    if (typeof renderizarCarrito === 'function') renderizarCarrito();
+    if (typeof actualizarContadorCarrito === 'function') actualizarContadorCarrito();
+    // Abrir sidebar y refrescar
+    document.getElementById("cart-sidebar").style.right = "0";
+    document.getElementById("cart-count").innerText = carrito.length;
 }
 
 document.addEventListener("DOMContentLoaded", () => renderizarCatalogo());
