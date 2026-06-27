@@ -48,8 +48,12 @@ function renderizarCatalogo(filtro = "todas") {
             
             <div style="text-align: center; margin: 5px 0;">
                 <span style="font-size: 0.9rem;">Compartir: </span>
-                <i class="fab fa-whatsapp" style="color: #25D366; cursor: pointer; margin-right: 10px;"></i> 
-                <i class="fab fa-facebook" style="color: #1877F2; cursor: pointer;"></i>
+                <a href="https://wa.me/?text=¡Mira%20esta%20deliciosa%20opción:%20${encodeURIComponent(prod.nombre)}!%20${window.location.href}" target="_blank">
+                    <i class="fab fa-whatsapp" style="color: #25D366; cursor: pointer; margin-right: 10px; font-size: 1.2rem;"></i>
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}" target="_blank">
+                    <i class="fab fa-facebook" style="color: #1877F2; cursor: pointer; font-size: 1.2rem;"></i>
+                </a>
             </div>
             
             <button onclick="agregarAlCarrito('${prod.codigo}')" style="width: 100%; background-color: #FFC0CB; color: #8B4513; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer;">

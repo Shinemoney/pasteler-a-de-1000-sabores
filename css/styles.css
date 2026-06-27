@@ -19,7 +19,7 @@ body {
     font-family: 'Lato', sans-serif;
     color: var(--text-primary);
     margin: 0;
-    padding-top: 80px; /* Compensación para el header fijo */
+    padding-top: 90px;
 }
 
 /* Header Fijo */
@@ -42,10 +42,11 @@ header {
     padding: 0 20px;
 }
 
+/* CORRECCIÓN: Forzamos rosado y eliminamos subrayado */
 .brand {
     font-family: 'Pacifico', cursive;
-    color: var(--accent-pink);
-    text-decoration: none;
+    color: var(--accent-pink) !important; 
+    text-decoration: none !important;
     font-size: 1.5rem;
 }
 
@@ -56,21 +57,36 @@ header {
 }
 
 .nav-links a { 
-    color: var(--accent-pink); 
-    text-decoration: none; 
+    color: var(--accent-pink) !important; 
+    text-decoration: none !important; 
     font-weight: bold; 
     transition: color 0.3s;
 }
 
 .nav-links a:hover { 
-    color: var(--white); 
+    color: var(--white) !important; 
 }
 
 .nav-cart { 
     margin-left: auto; 
-    color: var(--accent-pink); 
+    color: var(--accent-pink) !important; 
     font-size: 1.2rem; 
     cursor: pointer;
+}
+
+/* Estilos de Tarjetas */
+.tarjeta {
+    background-color: var(--white);
+    border: 2px solid transparent;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tarjeta.seleccionada {
+    background-color: var(--accent-pink);
+    border-color: #ff69b4;
 }
 
 /* Tipografía y Secciones */
@@ -104,10 +120,17 @@ section {
     filter: brightness(0.9);
 }
 
-footer { 
-    background-color: var(--accent-choco); 
-    color: var(--white); 
-    text-align: center; 
-    padding: 20px; 
-    margin-top: 40px; 
+footer {
+    background-color: #8B4513 !important;
+    color: #FFC0CB !important;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 50px;
+    width: 100%;
+}
+
+footer p {
+    color: #FFC0CB !important;
+    font-size: 1rem;
+    margin: 5px 0;
 }

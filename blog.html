@@ -2,20 +2,60 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog y Comunidad - Pastelería 1000 Sabores</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Pastelería 1000 Sabores</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Asegúrate de que este archivo tenga los estilos del footer -->
+    <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Arial', sans-serif; background-color: #fdf6f0; padding-top: 90px; }
+
+    /* HEADER UNIFICADO */
+    header { 
+        position: fixed; top: 0; left: 0; width: 100%; height: 80px;
+        background-color: #8B4513; 
+        display: flex; align-items: center; justify-content: center;
+        z-index: 9999; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    .nav-container { 
+        display: flex; align-items: center; justify-content: space-between; 
+        width: 100%; max-width: 1200px; padding: 0 20px; 
+    }
+
+    .logo-area { display: flex; align-items: center; gap: 15px; }
+    .logo-area img { height: 50px; width: auto; border-radius: 50%; }
+    .logo-area span { font-family: 'Pacifico', cursive; color: #FFC0CB; font-size: 1.5rem; }
+
+    /* LINKS ROSADOS */
+    .nav-links { display: flex; gap: 25px; }
+    .nav-links a { 
+        color: #FFC0CB; /* El rosado que querías */
+        font-weight: bold; 
+        text-decoration: none; 
+        font-size: 1.1rem; 
+        transition: color 0.3s;
+    }
+    .nav-links a:hover { color: #ffffff; } /* Blanco al pasar el mouse */
+    
+    .nav-cart { color: #FFC0CB; font-size: 1.2rem; cursor: pointer; }
+    
+    /* TARJETAS */
+    .card-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 20px; max-width: 1000px; margin: auto; }
+    .card { background: white; padding: 25px; border-radius: 15px; border-top: 5px solid #8B4513; cursor: pointer; transition: all 0.3s ease; }
+    .card.seleccionada { background-color: #FFC0CB !important; border-top: 5px solid #ff69b4 !important; }
+</style>
 </head>
 <body>
 
     <header>
         <div class="nav-container">
-            <a href="index.html" class="brand">Pastelería 1000 Sabores</a>
+            <img src="assets/1logo.jpeg" alt="Logo" style="height: 60px; width: auto;">
+           <span>Pastelería 1000 Sabores</span>
             <nav class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="productos.html">Productos</a>
                 <a href="registro.html">Registro</a>
+                <a href="login.html">Login</a>
                 <a href="blog.html">Blog</a>
                 <a href="contacto.html">Contacto</a>
             </nav>
@@ -30,52 +70,30 @@
     <section class="blog-section" style="padding: 60px 20px; max-width: 1000px; margin: 0 auto;">
         <h2 style="color: #8B4513; text-align: center; font-size: 2.5rem; margin-bottom: 10px;">Rincón del Aprendiz</h2>
         <p style="text-align: center; color: #5D4037; margin-bottom: 40px; font-style: italic;">
-            Consejos, recetas y noticias compartidas por nuestros estudiantes de gastronomía Duoc.
+            Consejos, recetas y noticias compartidas por nuestros estudiantes de gastronomía.
         </p>
         
         <div class="blog-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
             
             <article class="blog-card" style="background: white; padding: 25px; border-radius: 12px; border: 1px solid #FFC0CB; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
                 <h3 style="color: #D2691E; margin-top: 0;">Técnicas de Temperado</h3>
-                <p style="color: #5D4037; font-size: 0.95rem; line-height: 1.5;">Dominar el temperado del chocolate es esencial para lograr ese brillo profesional. Aprende los rangos de temperatura ideales según nuestros expertos.</p>
-                <a href="#" style="color: #e1306c; font-weight: bold; text-decoration: none;">Leer artículo →</a>
+                <p style="color: #5D4037; font-size: 0.95rem; line-height: 1.5;">Dominar el temperado del chocolate es esencial para lograr ese brillo profesional.</p>
+                <a href="detalle-blog.html#temperado" style="color: #e1306c; font-weight: bold; text-decoration: none;">Leer artículo →</a>
             </article>
 
             <article class="blog-card" style="background: white; padding: 25px; border-radius: 12px; border: 1px solid #FFC0CB; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
                 <h3 style="color: #D2691E; margin-top: 0;">Merengue Italiano</h3>
-                <p style="color: #5D4037; font-size: 0.95rem; line-height: 1.5;">La guía definitiva para un merengue estable y brillante. Perfecto para decorar tus pasteles favoritos sin riesgo a que bajen.</p>
-                <a href="#" style="color: #e1306c; font-weight: bold; text-decoration: none;">Leer artículo →</a>
+                <p style="color: #5D4037; font-size: 0.95rem; line-height: 1.5;">La guía definitiva para un merengue estable y brillante. Perfecto para decorar.</p>
+                <a href="detalle-blog.html#merengue" style="color: #e1306c; font-weight: bold; text-decoration: none;">Leer artículo →</a>
             </article>
 
             <article class="blog-card" style="background: white; padding: 25px; border-radius: 12px; border: 1px solid #FFC0CB; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
                 <h3 style="color: #D2691E; margin-top: 0;">Tendencias 2026</h3>
-                <p style="color: #5D4037; font-size: 0.95rem; line-height: 1.5;">Exploramos las nuevas tendencias de repostería saludable que están marcando pauta en las cocinas de nuestros estudiantes este semestre.</p>
-                <a href="#" style="color: #e1306c; font-weight: bold; text-decoration: none;">Leer artículo →</a>
+                <p style="color: #5D4037; font-size: 0.95rem; line-height: 1.5;">Exploramos las nuevas tendencias de repostería saludable marcando pauta este año.</p>
+                <a href="detalle-blog.html#tendencias" style="color: #e1306c; font-weight: bold; text-decoration: none;">Leer artículo →</a>
             </article>
         </div>
-
-        <div class="community-box" style="margin-top: 60px; background: #ffffff; padding: 30px; border-radius: 12px; border: 1px solid #FFC0CB; text-align: center;">
-            <h3 style="color: #8B4513;">¿Tienes una duda técnica?</h3>
-            <p style="color: #5D4037;">Deja tu pregunta y un estudiante de gastronomía la responderá en nuestro próximo boletín.</p>
-            <form id="form-consulta" style="max-width: 500px; margin: 20px auto 0; display: flex; flex-direction: column; gap: 10px;">
-                <input type="text" placeholder="Tu nombre" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
-                <textarea placeholder="Escribe tu consulta sobre repostería..." style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; height: 80px;"></textarea>
-                <button type="submit" style="padding: 10px; background: #FFC0CB; border: none; border-radius: 6px; color: #8B4513; font-weight: bold; cursor: pointer;">Enviar Pregunta</button>
-            </form>
-        </div>
     </section>
-
-    <div id="cart-sidebar" style="position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background: white; z-index: 9999; box-shadow: -2px 0 10px rgba(0,0,0,0.2); transition: 0.3s; padding: 20px; overflow-y: auto;">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h3 style="color: #8B4513;">Mi Carrito</h3>
-            <button id="close-cart-btn" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
-        </div>
-        <div id="cart-items-container" style="margin-top: 20px;"></div>
-        <div id="cart-total-amount" style="font-weight: bold; font-size: 1.2rem; margin: 20px 0; color: #8B4513;"></div>
-        <a href="pago.html" style="display:block; text-align:center; background:#8B4513; color:white; padding:15px; text-decoration:none; border-radius:6px; font-weight:bold;">
-            Finalizar Pedido
-        </a>
-    </div>
 
     <script src="js/carrito.js"></script>
 </body>
